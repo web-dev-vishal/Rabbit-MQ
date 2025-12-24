@@ -16,7 +16,6 @@ async function recvMail() {
     } catch (error) {
         console.log(error)
     }
-
 }
 
 recvMail();
