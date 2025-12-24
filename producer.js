@@ -9,10 +9,10 @@ async function sendMail() {
         const routingKey = "send_mail"
 
         const message = {
-            to: "VS@gmail.com",
+            to: "abc@gmail.com",
             from: "guyr07332@gmail.com",
-            subject: "Thank you mail",
-            body: "Hello VS!!!"
+            subject: "Thank you message mail",
+            body: "Hello abc!!!"
         }
 
         await channel.assertExchange(exchange, "direct", { durable: false });
