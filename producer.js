@@ -20,6 +20,11 @@ async function sendMail() {
         
         await channel.bindQueue("mail_queue", exchange, routingKey)
 
+        channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(message)));
+        console.log("Mail data was sent", message);
+
+        
+
 
     } catch (error) {
         console.log(error)
