@@ -9,10 +9,10 @@ async function sendMail() {
         const routingKey = "send_mail"
 
         const message = {
-            to: "vishalsanam2024@gmail.com",
+            to: "VS@gmail.com",
             from: "guyr07332@gmail.com",
-            subject: "Hello TP mail",
-            body: "Hello ProMan!!!"
+            subject: "Thank you mail",
+            body: "Hello VS!!!"
         }
 
         await channel.assertExchange(exchange, "direct", {durable: false});
@@ -23,7 +23,9 @@ async function sendMail() {
         channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(message)));
         console.log("Mail data was sent", message);
 
-        
+        setTimeout(()=> {
+            connection.close();
+        }, 500)
 
 
     } catch (error) {
