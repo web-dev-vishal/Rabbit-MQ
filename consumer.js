@@ -8,8 +8,9 @@ async function recvMail() {
         await channel.assertQueue("mail_queue", { durable: false });
 
         channel.consume("mail_queue", (message) => {
-            if (!message == null) {
-                console.log("recv message", JSON.parse(message.content))
+            if (message !== null) {
+                console.log("recv message", JSON.parse(message.content));
+                channel.ack(message);
             }
         })
     } catch (error) {
