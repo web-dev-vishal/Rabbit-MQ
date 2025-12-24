@@ -18,6 +18,7 @@ async function sendMail() {
         await channel.assertExchange(exchange, "direct", {durable: false});
         await channel.assertQueue("mail_queue", {durable: false});
         
+        await channel.bindQueue("mail_queue", exchange, routingKey)
 
 
     } catch (error) {
