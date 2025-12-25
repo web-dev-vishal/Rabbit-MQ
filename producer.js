@@ -5,9 +5,10 @@ async function sendMail() {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel()
-        
+
         const exchange = "mail_exchange";
-        const routingKey = "send_mail"
+        const routingKeyforSubUser = "send_mail_to_subcribed_users"
+        const routingKeyforNormalUser = "send_mail_to_users"
 
         const message = {
             to: "abc@gmail.com",
@@ -17,6 +18,7 @@ async function sendMail() {
         }
 
         await channel.assertExchange(exchange, "direct", { durable: false });
+        await channel.assertQueue("subcribed_users_mail_queue", { durable: false });
         await channel.assertQueue("mail_queue", { durable: false });
 
         await channel.bindQueue("mail_queue", exchange, routingKey)
