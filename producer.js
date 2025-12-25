@@ -52,9 +52,9 @@ async function sendMail() {
         const routingKeyForNormalUser = "send_mail_to_users"
 
         const message = {
-            to: "abc@gmail.com",
+            to: "normaluser@gmail.com",
             from: "guyr07332@gmail.com",
-            subject: "Thank you message mail",
+            subject: "Thank you message mail to normal user",
             body: "Hello abcd!!!"
         }
 
@@ -66,7 +66,7 @@ async function sendMail() {
         await channel.bindQueue("subscribed_users_mail_queue", exchange, routingKeyForSubUser)
         await channel.bindQueue("users_mail_queue", exchange, routingKeyForNormalUser)
 
-        channel.publish(exchange, routingKeyForSubUser, Buffer.from(JSON.stringify(message)));
+        channel.publish(exchange, routingKeyForNormalUser, Buffer.from(JSON.stringify(message)));
         console.log("Mail data was sent", message);
 
         setTimeout(() => {
