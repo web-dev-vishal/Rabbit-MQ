@@ -5,9 +5,9 @@ async function recvMail() {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel()
 
-        await channel.assertQueue("usres_mail_queue", { durable: false });
+        await channel.assertQueue("users_mail_queue", { durable: false });
 
-        channel.consume("usres_mail_queue", (message) => {
+        channel.consume("users_mail_queue", (message) => {
             if (message !== null) {
                 console.log("Recv message for Normal user", JSON.parse(message.content));
                 channel.ack(message);
