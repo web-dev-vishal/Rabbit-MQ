@@ -66,6 +66,7 @@ async function sendMail() {
         await channel.bindQueue("subscribed_users_mail_queue", exchange, routingKeyForSubUser)
         await channel.bindQueue("users_mail_queue", exchange, routingKeyForNormalUser)
 
+        // channel.publish(exchange, routingKeyForSubUser, Buffer.from(JSON.stringify(message)));
         channel.publish(exchange, routingKeyForNormalUser, Buffer.from(JSON.stringify(message)));
         console.log("Mail data was sent", message);
 
