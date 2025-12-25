@@ -5,6 +5,7 @@ async function sendMail() {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel()
+        
         const exchange = "mail_exchange";
         const routingKey = "send_mail"
 
