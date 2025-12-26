@@ -1,16 +1,16 @@
 const amqp = require("amqplib");
 
-const sendMessage = async (routingKey, message) => {
+const receiveMessage = async () => {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel()
 
-        const exchange = "mail_exchange";
-        const exchangeType = "topic";
+        const exchange = "norification_exchange";
+        const queue = "order_queue";
 
-        await channel.assertExchange (exchange, exchangeType, {durable: true});
+        await channel.assertExchange (exchange, "topic", {durable: true});
+        await channel.assertExchange (queue, {durable: true});
 
-        channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(message)), {persistent: true});
         console.log("[x] Sent '%s: '$s'", routingkey, JSON.stringify(message));
         console.log(`Message was send! with routing ket as ${routingKey} and content as ${message}`);
 
