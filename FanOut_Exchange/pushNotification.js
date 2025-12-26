@@ -15,7 +15,7 @@ const pushNotification = async () => {
 
         await channel.bindQueue(queue.queue, exchange, "");
 
-        channel.consume(q.queue, (msg) => {
+        channel.consume(queue.queue, (msg) => {
             if (msg !== null) {
                 const product = JSON.parse(msg.content.toString());
                 console.log("Sending Push notification for produvt =>", product.name);
