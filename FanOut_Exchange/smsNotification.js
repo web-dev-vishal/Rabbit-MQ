@@ -17,7 +17,7 @@ const smsNotification = async (product) => {
                 console.ack(msg)
             }
         })
-        
+
     } catch (error) {
         console.log("Error:", error);
     }
