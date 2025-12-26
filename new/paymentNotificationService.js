@@ -8,7 +8,7 @@ const receiveMessage = async () => {
         const exchange = "mail_exchange";
         const queue = "payment_queue";
 
-        await channel.assertExchange(exchange, "topic", {durable: true});
+        await channel.assertExchange(exchange, "topic", {durable: false});
         await channel.assertQueue(queue, {durable: true});
 
         await channel.bindQueue(queue, exchange, "payment.*");
