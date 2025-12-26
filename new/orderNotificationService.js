@@ -4,8 +4,7 @@ const receiveMessage = async () => {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel();
-
-        const exchange = "mail_exchange";
+        const exchange = "notification_exchange";
         const queue = "order_queue";
 
         await channel.assertExchange(exchange, "topic", {durable: true});
