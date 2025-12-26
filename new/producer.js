@@ -22,3 +22,6 @@ const sendMessage = async (routingKey, message) => {
     }
 };
 
+sendMessage("order.placed", {orderId: 12345, status: "placed"});
+
+sendMessage("payment.processed", {paymentId: 6789, status: "proccessed"})
