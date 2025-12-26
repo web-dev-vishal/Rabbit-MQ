@@ -1,6 +1,6 @@
 const amqp = require("amqplib");
 
-const announceNewProduct = async (product) => {
+const smsNotification = async (product) => {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel();
@@ -10,11 +10,11 @@ const announceNewProduct = async (product) => {
 
         await channel.assertExchange(exchange, exchangeType, { durable: true });
 
-      
-
         channel.consume(q.queue, (msg) => {
             if (msg !== null) {
                 const product = JSON.parse(msg.content.toString());
+                console.log("Sending SMS notification for produvt =>", product.name);
+                console.ack(msg)
             }
         })
         
@@ -23,4 +23,4 @@ const announceNewProduct = async (product) => {
     }
 };
 
-announceNewProduct({ id: 123, name: "iphone 20 pro max", price: 200000});
+smsNotification();
