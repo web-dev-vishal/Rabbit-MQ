@@ -10,6 +10,11 @@ const smsNotification = async (product) => {
 
         await channel.assertExchange(exchange, exchangeType, { durable: true });
 
+const  queue = await channel.assertQueue("", {exclusive: true});
+console.log("waiting for age => ", queue)
+
+
+
         channel.consume(q.queue, (msg) => {
             if (msg !== null) {
                 const product = JSON.parse(msg.content.toString());
