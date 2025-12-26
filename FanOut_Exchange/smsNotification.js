@@ -19,7 +19,7 @@ const smsNotification = async (product) => {
             if (msg !== null) {
                 const product = JSON.parse(msg.content.toString());
                 console.log("Sending SMS notification for produvt =>", product.name);
-                console.ack(msg)
+                channel.ack(msg);
             }
         })
 
