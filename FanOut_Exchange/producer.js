@@ -16,7 +16,7 @@ const announceNewProduct = async (product) => {
         console.log("sent => ", message);
 
         setTimeout(() => {
-            connection.close();
+            connection.close()
         }, 500);
     } catch (error) {
         console.log("Error:", error);
