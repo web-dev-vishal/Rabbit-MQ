@@ -16,7 +16,7 @@ const sendMessage = async (routingKey, message) => {
 
         setTimeout(()=> {
             connection.close();
-        }, 500);
+    }, 500);
     } catch (error) {
         console.log("Error:", error)
     }
