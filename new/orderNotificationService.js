@@ -11,7 +11,7 @@ const receiveMessage = async () => {
         await channel.assertExchange (exchange, "topic", {durable: true});
         await channel.assertExchange (queue, {durable: true});
 
-        
+        await channel.bindQueue(queue, exchange, "order.*")
 
         console.log("Waiting for messages");
         channel.consume(
