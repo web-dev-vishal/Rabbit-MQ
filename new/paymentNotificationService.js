@@ -11,14 +11,19 @@ const receiveMessage = async () => {
         await channel.assertExchange (exchange, "topic", {durable: true});
         await channel.assertQueue (queue, {durable: true});
 
-        await channel.bindQueue(queue, exchange, "order.*")
+        await channel.bindQueue(queue, exchange, "payment.*")
 
         console.log("Waiting for messages");
         channel.consume(
         queue,
         (msg) => {
             if (msg !== null) {
-                console.log(`[Payment Notification] Msg was consumed! with routingKey`);
+                console.log(`[Payment Notification] Msg was consumed! with routingKey]{
+                msg.fields.routingKey
+            } and context as  ${msg.content.toString()}`
+                );
+
+
                 channel.ack(msg);
             };
         },{ noAck: false}
