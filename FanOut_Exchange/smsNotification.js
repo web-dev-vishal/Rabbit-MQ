@@ -11,7 +11,7 @@ const smsNotification = async (product) => {
         await channel.assertExchange(exchange, exchangeType, { durable: true });
 
         const queue = await channel.assertQueue("", { exclusive: true });
-        console.log("waiting for age => ", queue)
+        console.log("waiting for mgs => ", queue)
 
         await channel.bindQueue(queue.queue, exchange, "");
 
