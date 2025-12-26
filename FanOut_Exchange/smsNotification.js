@@ -13,7 +13,7 @@ const smsNotification = async (product) => {
         const queue = await channel.assertQueue("", { exclusive: true });
         console.log("waiting for age => ", queue)
 
-
+        await channel.bindQueue(queue.queue, exchange, "");
 
         channel.consume(q.queue, (msg) => {
             if (msg !== null) {
