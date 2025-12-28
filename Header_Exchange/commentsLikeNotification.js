@@ -15,9 +15,9 @@ const consumeLiveStreamNotifications = async () => {
         console.log("Waiting for live stream notifiactions");
 
         await channel.bindQueue(q.queue, exchange, "", {
-            "x-watch": "all",
-            "notifiaction-type": "Live_stream",
-            "content-type": "gaming"
+            "x-watch": "any",
+            "notifiaction-type": "comment",
+            "content-type": "like"
         });
 
         // console.log("Waiting for messages");
