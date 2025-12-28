@@ -1,19 +1,22 @@
 const amqp = require("amqplib");
 
-const announceNewProduct = async (product) => {
+const sendNotification = async (headers, message) => {
     try {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel();
 
-        const exchange = "new_product_launch";
-        const exchangeType = "fanout";
+        const exchange = "header_exchange";
+        const exchangeType = "headers";
 
         await channel.assertExchange(exchange, exchangeType, { durable: true });
 
-        const message = JSON.stringify(product);
+        // const message = JSON.stringify(product);
 
-        channel.publish(exchange, "", Buffer.from(message), { persistent: true });
-        console.log("sent => ", message);
+        channel.publish(exchange, "", Buffer.from(message), {
+            persistent: true,
+            headers
+        });
+        console.log("Sent notification with headers");
 
         setTimeout(() => {
             connection.close()
