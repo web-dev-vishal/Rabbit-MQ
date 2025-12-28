@@ -27,25 +27,30 @@ const sendNotification = async (headers, message) => {
 
 // CORRECTED: Headers now match the consumer bindings
 // Consumer 1: Expects "notification-type": "new_video" AND "content-type": "video" (x-match: all)
-sendNotification({ 
-    "notification-type": "new_video", 
-    "content-type": "video" 
-}, "New music video uploaded");
+// sendNotification({ 
+//     "notification-type": "new_video", 
+//     "content-type": "video" 
+// }, "New music video uploaded");
 
-// Consumer 2: Expects "notification-type": "Live_stream" AND "content-type": "gaming" (x-match: all)
-sendNotification({ 
-    "notification-type": "Live_stream", 
-    "content-type": "gaming" 
-}, "Gaming live stream started");
+// // Consumer 2: Expects "notification-type": "Live_stream" AND "content-type": "gaming" (x-match: all)
+// sendNotification({ 
+//     "notification-type": "Live_stream", 
+//     "content-type": "gaming" 
+// }, "Gaming live stream started");
 
-// Consumer 3: Expects "notification-type": "comment" OR "content-type": "like" (x-match: any)
-sendNotification({ 
-    "notification-type": "comment", 
-    "content-type": "vlog" 
-}, "New comment on your vlog");
+// // Consumer 3: Expects "notification-type": "comment" OR "content-type": "like" (x-match: any)
+// sendNotification({ 
+//     "notification-type": "comment", 
+//     "content-type": "vlog" 
+// }, "New comment on your vlog");
 
-// Consumer 3: This will also match because it has "content-type": "like"
-sendNotification({ 
-    "notification-type": "other", 
-    "content-type": "like" 
-}, "Someone liked your video");
+// // Consumer 3: This will also match because it has "content-type": "like"
+// sendNotification({ 
+//     "notification-type": "other", 
+//     "content-type": "like" 
+// }, "Someone liked your video");
+
+sendNotification({ "x-match": "all", "notification-type": "new_video", "content-type": "video" }, "New music video uploaded");
+sendNotification({ "x-match": "all", "notification-type": "live_stream", "content-type": "gaming" }, "Gaming live stream started");
+sendNotification({ "x-match": "any", "notification-type-comment": "comment", "content-type": "vlog" }, "New comment on your vlog");
+sendNotification({ "x-match": "any", "notification-type-like": "like", "content-type": "vlog" }, "Someone liked your comment");
