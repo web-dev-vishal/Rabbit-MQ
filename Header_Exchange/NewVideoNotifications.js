@@ -14,7 +14,7 @@ const consumeNewVideoNotifications = async () => {
         const q = await channel.assertExchange("", { exclusive: true });
         console.log("Waiting for new video notifiactions");
 
-        await channel.bindQueue(queue, exchange, "", {
+        await channel.bindQueue(q.queue, exchange, "", {
             "x-watch": "all",
             "notifiaction-type": "new_video",
             "content-type": "video"
