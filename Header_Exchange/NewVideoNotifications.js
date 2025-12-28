@@ -5,9 +5,9 @@ const consumeNewVideoNotifications = async () => {
         const connection = await amqp.connect("amqp://localhost");
         const channel = await connection.createChannel();
         const exchange = "header_exchange";
-        const queue = "headers";
+        const exchangeType = "headers";
 
-        await channel.assertExchange(exchange, "exchangeType", { durable: true });
+        await channel.assertExchange(exchange, exchangeType, { durable: true });
 
         // await channel.assertQueue(queue, {durable: true});
 
