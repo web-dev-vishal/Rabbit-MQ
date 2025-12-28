@@ -26,4 +26,7 @@ const sendNotification = async (headers, message) => {
     }
 };
 
-announceNewProduct({ id: 123, name: "iphone 20 pro max", price: 200000});
+sendNotification({ "x-match": "all", "notifiaction-type": "new_video",  "content-type": "video"}, "New music video uploaded")
+sendNotification({ "x-match": "all", "notifiaction-type": "Live_stream", "content-type": "gaming" }, "Gaming live stream started")
+sendNotification({ "x-match": "any", "notification-type-comment": "comment", "content-type": "vlog" }, "New comment on your vlog")
+sendNotification({ "x-match": "any", "notification-type-like": "like",  "content-type": "vlog"}, "New comment on your vlog")
