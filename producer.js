@@ -3,7 +3,7 @@ const amqp = require("amqplib");
 async function sendMail() {
     try {
         const connection = await amqp.connect("amqp://localhost");
-        const channel = await connection.createChannel()
+        const channel = await connection.createChannel();
 
         const exchange = "mail_exchange";
         const routingKeyForSubUser = "send_mail_to_subcribed_users"
@@ -21,8 +21,8 @@ async function sendMail() {
         await channel.assertQueue("subscribed_users_mail_queue", { durable: false });
         await channel.assertQueue("users_mail_queue", { durable: false });
 
-        await channel.bindQueue("subscribed_users_mail_queue", exchange, routingKeyForSubUser)
-        await channel.bindQueue("users_mail_queue", exchange, routingKeyForNormalUser)
+        await channel.bindQueue("subscribed_users_mail_queue", exchange, routingKeyForSubUser);
+        await channel.bindQueue("users_mail_queue", exchange, routingKeyForNormalUser);
 
         // channel.publish(exchange, routingKeyForSubUser, Buffer.from(JSON.stringify(message)));
         channel.publish(exchange, routingKeyForNormalUser, Buffer.from(JSON.stringify(message)));
@@ -33,7 +33,7 @@ async function sendMail() {
         }, 500)
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
