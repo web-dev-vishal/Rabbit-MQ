@@ -7,6 +7,15 @@ async function sendToDelayedQueue(batchId, orders, delay) {
     const exchange = "delayed_exchange";
     await channel.assertExchange(exchange, "x-delayed-message", {
         arguments: { "x-delayed-type": "direct" },
+    });
+
+    const queue = "delayed_order_updates_queue";
+    await channel.assertQueue(queue, { durable: true });
+    await channel.bindQueue(queue, exchange, "");
+
+    const message = JSON.stringify({ batchId, orders });
+    channel.publish(exchange, "", Buffer.from(message), {
+        headers: { "x-delay": delay },
     })
 }
 
