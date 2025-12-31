@@ -1,20 +1,31 @@
 const amqp = require("amqplib");
 
-async function sendToDelayedQueue(batchId, orders, delay) { 
+async function sendToDelayedQueue(batchId, orders, delay) {
 }
 
-async function processBatchOrders (batchId, orders, delay) { 
+async function processBatchOrders(batchId, orders, delay) {
+    const batchId = generateBatchId();
+    const orders = collectOrdersForBatch();
+
+    console.log(`Processing batch ${batchId} with orders: ${JSON.stringify(orders)}`);
+
+    //Update inventory, generate shipping labels, etc.
+    await processOrders(orders);
+
+    // Send delayed message to update order status
+    const delay = 10000; // 10 sec
+    sendToDelayedQueue(batchId, orders, delay)
 }
 
 function generateBatchId() {
     return "batch-" + Date.now();
 }
 
-function collectOrdersForBatch(){
+function collectOrdersForBatch() {
 
 }
 async function processOrders(orders) {
-    
+
 }
 
 processOrders();
