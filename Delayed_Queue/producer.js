@@ -19,6 +19,9 @@ async function sendToDelayedQueue(batchId, orders, delay) {
     });
 
     console.log(`Sent batch ${batchId} update task to delayed queue with ${delay} ms delay`);
+
+    await channel.close();
+    await connection.close();
 }
 
 async function processBatchOrders(batchId, orders, delay) {
