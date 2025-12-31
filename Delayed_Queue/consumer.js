@@ -23,3 +23,15 @@ async function processBatchOrders() {
         { noAck: false }
     )
 }
+
+function updateOrderStatus(batchId) {
+    // Simulate order status update
+    return new Promise((resolve) => {
+        setTimeout(()=> {
+            console.log(`Order statuses update to "Stated Shipping" for batch: ${batchId}`)
+        })
+        resolve();
+    }, 1000); //Simulate time taken to update order statuses
+}
+
+processOrderUpdates();
