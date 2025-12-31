@@ -7,6 +7,7 @@ async function processBatchOrders (batchId, orders, delay) {
 }
 
 function generateBatchId() {
+    return "batch-" + Date.now();
 }
 
 function collectOrdersForBatch(){
