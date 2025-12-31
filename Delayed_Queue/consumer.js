@@ -9,15 +9,15 @@ async function processBatchOrders() {
 
     channel.consume(
         queue, 
-        async (msg) => {
-            if (msg !== null){
-                const {batchId} = JSON.parse(msg.content.toString());
+        async (batch) => {
+            if (batch !== null){
+                const {batchId, orders} = JSON.parse(batch.content.toString());
                 console.log(`Processing order update task for batch: ${batchId}`);
 
                 // Update order statuses for the batch 
                 await updateOrderStatus(batchId);
 
-                channel.ack(msg);
+                channel.ack(batch);
             }
         },
         { noAck: false }
