@@ -22,6 +22,11 @@ function generateBatchId() {
 }
 
 function collectOrdersForBatch() {
+    // Collect orders for the current batch 
+    return [
+        { orderId: 1, item: "Laptop", quantity: 1 },
+        { orderId: 2, item: "Phone", quantity: 2 }
+    ]
 
 }
 async function processOrders(orders) {
