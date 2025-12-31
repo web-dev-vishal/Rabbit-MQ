@@ -1,6 +1,10 @@
 const amqp = require("amqplib");
 
 async function sendToDelayedQueue(batchId, orders, delay) {
+    const connection = await amqp.connect("amqp://localhost");
+    const channel = await connection.createChannel();
+
+    
 }
 
 async function processBatchOrders(batchId, orders, delay) {
