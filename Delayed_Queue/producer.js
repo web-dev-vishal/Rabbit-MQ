@@ -16,7 +16,9 @@ async function sendToDelayedQueue(batchId, orders, delay) {
     const message = JSON.stringify({ batchId, orders });
     channel.publish(exchange, "", Buffer.from(message), {
         headers: { "x-delay": delay },
-    })
+    });
+
+    console.log(`Sent batch ${batchId} update task to delayed queue with ${delay} ms delay`);
 }
 
 async function processBatchOrders(batchId, orders, delay) {
