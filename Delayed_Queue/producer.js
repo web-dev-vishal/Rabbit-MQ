@@ -4,7 +4,10 @@ async function sendToDelayedQueue(batchId, orders, delay) {
     const connection = await amqp.connect("amqp://localhost");
     const channel = await connection.createChannel();
 
-    
+    const exchange = "delayed_exchange";
+    await channel.assertExchange(exchange, "x-delayed-message", {
+        arguments: { "x-delayed-type": "direct" },
+    })
 }
 
 async function processBatchOrders(batchId, orders, delay) {
