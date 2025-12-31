@@ -3,7 +3,7 @@ const amqp = require("amqplib");
 async function recvMail() {
     try {
         const connection = await amqp.connect("amqp://localhost");
-        const channel = await connection.createChannel()
+        const channel = await connection.createChannel();
 
         await channel.assertQueue("users_mail_queue", { durable: false });
 
@@ -14,7 +14,7 @@ async function recvMail() {
             }
         })
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
