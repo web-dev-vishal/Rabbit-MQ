@@ -37,7 +37,7 @@ async function processBatchOrders() {
     await processOrders(orders);
 
     // Send delayed message to update order status
-    const delay = 10000; // 10 sec
+    const delay = 5000; // 10 sec
     await sendToDelayedQueue(batchId, orders, delay);
 }
 
