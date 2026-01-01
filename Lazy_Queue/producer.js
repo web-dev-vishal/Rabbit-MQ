@@ -17,7 +17,7 @@ async function setup(message) {
         },
     });
 
-    await channel.bindQueue(queueName, exchangeName, routingKey)
+await channel.bindQueue(queueName, exchangeName, routingKey)
 
     channel.publish(exchangeName, routingKey, Buffer.from(message), {
         persistent: true,
