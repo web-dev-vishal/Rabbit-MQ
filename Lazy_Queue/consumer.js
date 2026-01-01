@@ -15,6 +15,11 @@ async function consumerMessage() {
     console.log(`Wating for message in ${queueName}`);
 
     channel.consume(queueName, (msg) => {
-
-    })
+        if (msg !== null) {
+            console.log(`Received mesaage: ${msg.content.toString()}`);
+            channel.ack(msg);
+        }
+    });
 }
+
+consumerMessage();
